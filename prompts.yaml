@@ -8,21 +8,21 @@ system_prompt: |
   - Only include entries if you see a price.
   - If an item has multiple price options (e.g., small/large), return them all in a list.
   - Return JSON in this exact format:
-      {
+      {{
         "menu": [
-          { "name": "...", "description": "...", "prices": [...] },
+          {{ "name": "...", "description": "...", "prices": [...] }},
           ...
         ]
-      }
+      }}
   - Do NOT wrap the output in markdown; output raw JSON.
   - If the OCR text has noise or non‐menu lines, ignore them.
   - Example:
       Input OCR:
         "Cheese Pizza ........... 8.99\nPepperoni Pizza ...... 9.99 / 12.99\n"
       Desired JSON:
-        {
+        {{
           "menu": [
-            { "name": "Cheese Pizza", "description": "", "prices": [8.99] },
-            { "name": "Pepperoni Pizza", "description": "", "prices": [9.99, 12.99] }
+            {{ "name": "Cheese Pizza", "description": "", "prices": [8.99] }},
+            {{ "name": "Pepperoni Pizza", "description": "", "prices": [9.99, 12.99] }}
           ]
-        }
+        }}
