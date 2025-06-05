@@ -11,3 +11,14 @@ A small Python project that:
 - A full `requirements.txt` for easy install.
 
 ---
+
+##  Project Structure 
+
+├── README.md ← This file
+├── requirements.txt ← Python dependencies
+├── prompts.yaml ← YAML file containing the system prompt
+└── src
+├── init.py
+├── ocr.py ← OCR utility (Pillow + pytesseract)
+├── pipeline.py ← Builds and invokes the LangChain pipeline, loading prompt from YAML
+└── main.py ← CLI entry point: takes image path, runs OCR → pipeline → shows DataFrame
