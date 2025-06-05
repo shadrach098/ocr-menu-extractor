@@ -72,3 +72,11 @@ Many restaurants publish menu images (JPEG, PNG) online, but to analyze or inges
   ```bash
   export OPENAI_API_KEY="sk-…"         # Linux/macOS
   $env:OPENAI_API_KEY="sk-…"           # Windows PowerShell
+  ```
+## Installation
+- Clone the repository
+  ```bash
+  git clone https://github.com/<your-username>/ocr-menu-extractor.git
+  cd ocr-menu-extractor
+  ```
+
