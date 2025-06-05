@@ -66,7 +66,7 @@ Many restaurants publish menu images (JPEG, PNG) online, but to analyze or inges
 ## Installation
 - Clone the repository
   ``` bash
-  git clone https://github.com/<your-username>/ocr-menu-extractor.git
+  git clone https://github.com/shadrach098/ocr-menu-extractor.git
   cd ocr-menu-extractor
   ```
 - Create and activate a virtual environment
