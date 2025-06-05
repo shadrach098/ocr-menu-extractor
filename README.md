@@ -12,16 +12,6 @@ A Python project that performs OCR on a menu image and uses a LangChain (ChatOpe
 4. [Installation](#installation)  
 5. [Project Structure](#project-structure)  
 6. [Usage](#usage)  
-7. [Detailed Component Descriptions](#detailed-component-descriptions)  
-   - [OCR Module (`src/ocr.py`)](#ocr-module-srcocrpy)  
-   - [Pipeline Module (`src/pipeline.py`)](#pipeline-module-srcpipelinepy)  
-   - [Main Script (`src/main.py`)](#main-script-srcmainpy)  
-   - [Prompt File (`prompts.yaml`)](#prompt-file-promptsyaml)  
-8. [Example Run](#example-run)  
-9. [Extending & Customizing](#extending--customizing)  
-10. [Contributing](#contributing)  
-11. [License](#license)  
-
 ---
 
 ## Project Overview
@@ -75,8 +65,61 @@ Many restaurants publish menu images (JPEG, PNG) online, but to analyze or inges
   ```
 ## Installation
 - Clone the repository
-  ```bash
+  ``` bash
   git clone https://github.com/<your-username>/ocr-menu-extractor.git
   cd ocr-menu-extractor
   ```
+- Create and activate a virtual environment
+  ```bash
+  python3 -m venv venv
+  source venv/bin/activate          # macOS/Linux
+  # or
+  venv\Scripts\activate             # Windows (CMD/PowerShell)
+  ```
+- Install dependencies
+  ```bash
+  pip install -r requirements.txt
+  ```
+- Verify Tesseract
+  ```bash
+  tesseract --version
+  ```
+## Project Structure
+ ```paintext
+ocr-menu-extractor/
+├── README.md                ← This file (all in Markdown, detailed)
+├── requirements.txt         ← All Python dependencies
+├── prompts.yaml             ← YAML file containing the system prompt
+└── src
+    ├── __init__.py
+    ├── ocr.py               ← OCR utility module
+    ├── pipeline.py          ← Builds LangChain pipeline, loads YAML prompt, defines Pydantic models
+    └── main.py              ← CLI entry point: runs OCR → pipeline → DataFrame
+ ```
+## Usage
+ ```bash
+   # Activate your virtual environment first (venv/bin/activate or venv\Scripts\activate)
 
+   # Basic invocation (uses prompts.yaml by default)
+   python -m src.main /path/to/your/menu_image.jpg
+
+   # If you have a different prompt file, pass it with --prompt-yaml
+   python -m src.main /path/to/your/menu_image.jpg --prompt-yaml custom_prompts.yaml
+ ```
+   - Arguments
+      image_path (required): Path to the menu image (JPEG, PNG, etc.).
+      --prompt-yaml (optional): Path to a YAML file containing system_prompt. Defaults to prompts.yaml.
+   - Output
+      Prints status messages as OCR and LLM pipeline succeed or fail.
+      Displays a sorted DataFrame in the console, for example:
+      ```bash
+      ✅ OCR succeeded. Extracted text length: 1423
+      ✅ LangChain pipeline succeeded.
+
+      Extracted Menu Items:
+             Food_name         Description           Price(s)
+      1   Caesar Salad      Romaine, Parmesan et al.  (7.99,)
+      2   Grilled Salmon    Served with lemon butter  (15.49,)
+      3   Pepperoni Pizza   Extra cheese, hand-tossed (12.99, 15.99)
+
+     ```
